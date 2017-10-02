@@ -1,0 +1,25 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Trip.cshtml";
+}
+
+<link rel="stylesheet" href="~/Content/savana/animate.min.css">
+<link rel="stylesheet" href="~/Content/savana/savana.css">
+<script src="~/Scripts/savana/savana.js"></script>
+<script src="~/Scripts/savana/savana.regressive.counter.js"></script>
+<link rel="stylesheet" href="~/Content/savana/savana.regressive.counter.css">
+<script>
+    $savana(document).done(function (e) {
+        var departure = "@ViewBag.Departure";
+        var date = departure.substring(0, 10);
+        var time = departure.substring(11, 16);
+        $savana('.clock').regressiveCounter(date, time);
+    });
+</script>
+<div class="jumbotron">
+    <h1 class="display-3">@ViewBag.Description</h1>
+    <p>Fecha de partida @ViewBag.Departure</p>
+    <p>Falta</p>
+    <hr class="my-4">
+    <div class="clock"></div>
+</div>
