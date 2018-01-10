@@ -1,26 +1,49 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Trip.cshtml";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="~/Content/savana/animate.min.css">
-<link rel="stylesheet" href="~/Content/savana/savana.css">
-<script src="~/Scripts/savana/savana.js"></script>
-<script src="~/Scripts/savana/savana.regressive.counter.js"></script>
-<link rel="stylesheet" href="~/Content/savana/savana.regressive.counter.css">
-<script>
-    $savana(document).done(function (e) {
-        var departure = "@ViewBag.Departure";
-        var date = departure.substring(0, 10);
-        var time = departure.substring(11, 16);
-        $savana('.clock').regressiveCounter(date, time);
-    });
-</script>
-<div class="jumbotron">
-    <h1 class="display-3">@ViewBag.Description</h1>
-    <hr class="my-4">
-    <p>Fecha de partida @ViewBag.Departure</p>
-    <p>Falta</p>
-    <div class="clock"></div>
-</div>
+<div class="container">
+    <!-- Example row of columns -->
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Destino -> @ViewBag.Location </h2>
+            <p>Fecha -> @ViewBag.Departure </p>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+        <div class="col-md-6">
+            <h2>Falta</h2>
+            <div id="main-example"></div>
+            <p><a class="btn btn-secondary" href="#" role="button">View details &raquo;</a></p>
+        </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+        <div class="container">
+            <h1 class="display-3">Ups! No hay posts</h1>
+            <p>Se el primero en subir una foto con el hastag #vamosCarmelita o #egresadas2017</p>
+            <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more &raquo;</a></p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Clima en Santiago</div>
+                <div class="card-body text-secondary">
+                    <h4 class="card-title">Secondary card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card border-secondary mb-3" style="max-width: 20rem;">
+                <div class="card-header">Info importante</div>
+                <div class="card-body text-secondary">
+                    <h4 class="card-title">Secondary card title</h4>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                </div>
+            </div>
+        </div>
+    </div>
