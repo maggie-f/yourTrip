@@ -52,6 +52,19 @@ namespace yourTrip.Controllers
             }
         }
 
+
+        [AllowAnonymous]
+        public ActionResult LoginInstagram()
+        {
+            string client_id = System.Configuration.ConfigurationManager.AppSettings["client_id"].ToString();
+            string secret = System.Configuration.ConfigurationManager.AppSettings["client_secret"].ToString();
+            string redirectUri = "http://localhost:58766/Trip/Index";
+            string url = "https://www.instagram.com/oauth/authorize/?client_id="+client_id+"&redirect_uri="+redirectUri+"&response_type=code";
+            return RedirectPermanent(url);
+        }
+
+
+
         //
         // GET: /Account/Login
         [AllowAnonymous]

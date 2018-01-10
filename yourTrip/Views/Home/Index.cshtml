@@ -23,3 +23,16 @@
     <hr class="my-4">
     <div class="clock"></div>
 </div>
+
+<ul class="instagram">
+    @foreach (var image in Model.Images)
+    {
+        <li>
+            <div class="image_frame">
+                <a href="/instagram-@image.Id/@image.CaptionText.Slugify()" title="@image.CaptionText">
+                    <img src="@image.Thumbnail" />
+                </a>
+            </div>
+        </li>
+    }
+</ul>
