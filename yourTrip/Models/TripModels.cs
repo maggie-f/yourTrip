@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -8,23 +11,19 @@ namespace yourTrip.Models
     public class TripModels
     {
         public int Id { get; set; }
-        public string Description { get; set; }
+        [Required]
+        [StringLength(250)]
         public string Location { get; set; }
+        [StringLength(50)]
+        public string Latitud { get; set; }
+        [StringLength(50)]
+        public string Longitud { get; set; }
+        [Required]
         public DateTime Departure { get; set; }
 
-        public TripModels() { }
-
-        public TripModels GetTrip()
-        {
-            TripModels trip = new TripModels()
-            {
-                Id = 1,
-                Description = "Mini Vacas Carmelita",
-                Location = "Santiago, Chile",
-                Departure = new DateTime(2017, 11, 24, 23, 35, 00)
-            };
-
-            return trip;
-        }
+        //[StringLength(128)]
+        //public string UserId { get; set; }
+        //[ForeignKey(name: "AspNetUsersID")]
+        //public ApplicationUser ApplicationUser { get; set; }
     }
 }

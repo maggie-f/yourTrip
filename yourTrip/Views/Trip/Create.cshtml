@@ -1,0 +1,149 @@
+﻿@model yourTrip.Models.TripModels
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>TripModels</h4>
+        <hr />
+        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class="form-group">
+                @Html.LabelFor(model => model.Latitud, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Latitud, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Longitud, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Longitud, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>*@
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+
+
+                @*@Html.EditorFor(model => model.Location, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control controls", @type = "text", placeholder = "Start typing here" } })*@
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Departure, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="alert alert-danger alert-dismissible" role="alert" style="display:none;">
+            @Html.ValidationMessageFor(model => model.Location, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Departure, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "text-danger" })
+            @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<!-- Maps Area -->
+
+<style>
+    #map-canvas {
+        height: 300px;
+    }
+</style>
+
+<div id="listing">
+    <table id="resultsTable">
+        <tbody id="results"></tbody>
+    </table>
+</div>
+<input id="autocomplete" class="controls" type="text" placeholder="Start typing here" />
+<div id="map-canvas"></div>
+
+
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places"></script>
+
+<script>
+    var map;
+    function initialize() {
+        var mapsOptions = {
+            zoom: 11,
+            center: new google.maps.LatLng(-34.387, 150.566)
+        };
+        map = new google.maps.Map(document.getElementById("map-canvas"), mapsOptions);
+
+        autocomplete = new google.maps.places.Autocomplete((
+            document.getElementById('autocomplete')), {
+                types: ['(cities, countries, provinces    )']
+            });
+        places = new google.maps.places.PlacesService(map);
+
+        autocomplete.addListener('place_changed', onPlaceChanged);
+    }
+
+    function onPlaceChanged() {
+        var place = autocomplete.getPlace();
+        if (place.geometry) {
+            map.panTo(place.geometry.location);
+            map.setZoom(15);
+            search();
+        } else {
+            document.getElementById('autocomplete').placeholder = 'Enter a city';
+        }
+    }
+
+    function search() {
+        //TODO: Dibujar el iconito
+
+        var search = {
+            bounds: map.getBounds(),
+            types: ['lodging']
+        };
+
+        places.nearbySearch(search, function (results, status) {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+                // Create a marker for each hotel found, and
+                // assign a letter of the alphabetic to each marker icon.
+                //for (var i = 0; i < results.length; i++) {
+                //    var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+                //    var markerIcon = MARKER_PATH + markerLetter + '.png';
+                //    // Use marker animation to drop the icons incrementally on the map.
+                //    markers[i] = new google.maps.Marker({
+                //        position: results[i].geometry.location,
+                //        animation: google.maps.Animation.DROP,
+                //        icon: markerIcon
+                //    });
+                //    // If the user clicks a hotel marker, show the details of that hotel
+                //    // in an info window.
+                //    markers[i].placeResult = results[i];
+                //    google.maps.event.addListener(markers[i], 'click', showInfoWindow);
+                //    setTimeout(dropMarker(i), i * 100);
+                //    addResult(results[i], i);
+                //}
+            }
+        });
+    }
+    google.maps.event.addDomListener(window, 'load', initialize);
+</script>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

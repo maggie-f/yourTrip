@@ -8,18 +8,16 @@
 <script src="~/Scripts/savana/savana.js"></script>
 <script src="~/Scripts/savana/savana.regressive.counter.js"></script>
 <link rel="stylesheet" href="~/Content/savana/savana.regressive.counter.css">
-<script>
-    $savana(document).done(function (e) {
-        var departure = "@ViewBag.Departure";
-        var date = departure.substring(0, 10);
-        var time = departure.substring(11, 16);
-        $savana('.clock').regressiveCounter(date, time);
-    });
-</script>
-<div class="jumbotron">
-    <h1 class="display-3">@ViewBag.Description</h1>
-    <p>Fecha de partida @ViewBag.Departure</p>
-    <p>Falta</p>
-    <hr class="my-4">
-    <div class="clock"></div>
+
+<div class="page-header">
+    <h1><small><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></small>Your attention please!</h1>
 </div>
+
+<section >
+    <h3>Welcome to My Trips, the place to track, find places of interest and manage your trips!</h3>
+</section>
+
+
+<section class="row ">
+    <input type="button" value="Let's go!" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("Login","Account")'" />
+</section>

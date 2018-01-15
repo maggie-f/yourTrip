@@ -13,12 +13,12 @@ namespace yourTrip.Controllers
         public ActionResult Index()
         {
             TripModels trip = new TripModels();
-            trip = trip.GetTrip();
+            //trip = trip.GetTrip();
 
-            ViewBag.Description = trip.Description;
-            ViewBag.Location = trip.Location;
-            string dateFormat = ConfigurationManager.AppSettings["DateFormat"].ToString();
-            ViewBag.Departure = trip.Departure.ToString(dateFormat);
+            //ViewBag.Description = trip.Description;
+            //ViewBag.Location = trip.Location;
+            //string dateFormat = ConfigurationManager.AppSettings["DateFormat"].ToString();
+            //ViewBag.Departure = trip.Departure.ToString(dateFormat);
 
             return View();
         }
