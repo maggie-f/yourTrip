@@ -2,7 +2,11 @@
     box-sizing: border-box;
 }
 a {
-    color: #5bc0de;
+    color: white;/*#5bc0de;*/
+}
+a:hover{
+    color: #353434;
+    background-color:#aea5a5;
 }
 img {
     width: 100%;
@@ -11,9 +15,10 @@ figure {
     margin: 0;
 }
 .navbar-trip {
-    background-color: #8d8e8e;
-    border-color: #e7e7e7;
+    background-color: #ae0158; /* #e7d3d4; #8d8e8e;*/
+    border-color: #e7d3d4;
 }
 .title {
-    color: #5bc0de;
+    color: #ea64a7;
+    font-size:30px;
 }

@@ -13,7 +13,7 @@
     <div class="form-horizontal">
         <h4>TripModels</h4>
         <hr />
-        @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
             <div class="form-group">
                 @Html.LabelFor(model => model.Latitud, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -26,14 +26,14 @@
                 <div class="col-md-10">
                     @Html.EditorFor(model => model.Longitud, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
-            </div>*@
+            </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Location, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
 
 
-                @*@Html.EditorFor(model => model.Location, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control controls", @type = "text", placeholder = "Start typing here" } })*@
+                @Html.EditorFor(model => model.Location, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control controls", @type = "text", placeholder = "Start typing here" } })
             </div>
         </div>
 
