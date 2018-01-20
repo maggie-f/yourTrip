@@ -248,6 +248,12 @@
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\main.css">
+      <DependentUpon>main.scss</DependentUpon>
+    </Content>
+    <Content Include="Content\main.min.css">
+      <DependentUpon>main.css</DependentUpon>
+    </Content>
     <Content Include="Content\savana\animate.css" />
     <Content Include="Content\savana\animate.min.css" />
     <Content Include="Content\savana\savana.css" />
@@ -256,9 +262,17 @@
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
-    <Content Include="Content\Site.css" />
     <Content Include="img\avion.jpg" />
+    <Content Include="img\ojoPez.JPG" />
+    <Content Include="img\edificios.jpg" />
+    <Content Include="img\gato.jpg" />
+    <Content Include="img\luces.jpg" />
+    <Content Include="img\puente2.jpg" />
+    <Content Include="img\lago.jpg" />
     <Content Include="img\login-background.jpg" />
+    <Content Include="img\palmeras - Copy.jpg" />
+    <Content Include="img\puente.jpg" />
+    <Content Include="img\ruta.jpg" />
     <Content Include="Scripts\ai.0.22.19-build00125.js" />
     <Content Include="Scripts\ai.0.22.19-build00125.min.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -268,6 +282,11 @@
     </Content>
     <Content Include="Metadata\deploymentTemplates\apiappconfig.azureresource.json" />
     <Content Include="apiapp.json" />
+    <None Include="compilerconfig.json" />
+    <None Include="compilerconfig.json.defaults">
+      <DependentUpon>compilerconfig.json</DependentUpon>
+    </None>
+    <Content Include="Content\main.scss" />
     <None Include="Properties\PublishProfiles\maggie.pubxml" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\clock\jquery-3.2.1.min.js" />

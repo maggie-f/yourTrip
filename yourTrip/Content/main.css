@@ -1,0 +1,84 @@
+﻿* {
+  box-sizing: border-box; }
+
+figure {
+  margin: 0; }
+
+a {
+  color: #7F2852; }
+  a:hover {
+    color: #AE84A0; }
+
+.navbar-trip {
+  background-color: #7F2852;
+  border-color: #e7e7e7; }
+  .navbar-trip a {
+    color: #f6e5ee; }
+    .navbar-trip a:hover {
+      color: #808080; }
+
+.title {
+  color: #f6e5ee; }
+
+.btn-trip {
+  color: #ffffff;
+  background-color: #AE84A0;
+  border-color: #AE84A0; }
+
+.btn-trip:hover,
+.btn-trip:focus,
+.btn-trip:active,
+.btn-trip.active,
+.open .dropdown-toggle.btn-trip {
+  color: #ffffff;
+  background-color: #7F2852;
+  border-color: #7F2852; }
+
+.btn-trip:active,
+.btn-trip.active,
+.open .dropdown-toggle.btn-trip {
+  background-image: none; }
+
+.btn-trip.disabled,
+.btn-trip[disabled],
+fieldset[disabled] .btn-trip,
+.btn-trip.disabled:hover,
+.btn-trip[disabled]:hover,
+fieldset[disabled] .btn-trip:hover,
+.btn-trip.disabled:focus,
+.btn-trip[disabled]:focus,
+fieldset[disabled] .btn-trip:focus,
+.btn-trip.disabled:active,
+.btn-trip[disabled]:active,
+fieldset[disabled] .btn-trip:active,
+.btn-trip.disabled.active,
+.btn-trip[disabled].active,
+fieldset[disabled] .btn-trip.active {
+  background-color: #7F2852;
+  border-color: #7F2852; }
+
+.panel-trip {
+  border-color: #AE84A0; }
+  .panel-trip .panel-heading {
+    color: #7F2852;
+    background-color: #EED1E2;
+    border-color: #AE84A0; }
+  .panel-trip .panel-collapse .panel-body {
+    border-top-color: #AE84A0; }
+  .panel-trip .panel-collapse .panel-body {
+    border-bottom-color: #EED1E2; }
+
+.rute, .brige, .reflector {
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 478px; }
+
+.rute {
+  background-image: url(../img/ruta.jpg); }
+
+.brige {
+  background-image: url(../img/puente2.jpg); }
+
+.reflector {
+  background-image: url(../img/ojoPez.JPG); }
+

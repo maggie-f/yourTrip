@@ -3,21 +3,18 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<link rel="stylesheet" href="~/Content/savana/animate.min.css">
-<link rel="stylesheet" href="~/Content/savana/savana.css">
-<script src="~/Scripts/savana/savana.js"></script>
-<script src="~/Scripts/savana/savana.regressive.counter.js"></script>
-<link rel="stylesheet" href="~/Content/savana/savana.regressive.counter.css">
+<div class="container body-content backCover">
+    <div class="page-header">
+        <h1><small><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></small>Your attention please!</h1>
+    </div>
 
-<div class="page-header">
-    <h1><small><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></small>Your attention please!</h1>
+    <section>
+        <h3>Welcome to My Trips, the place to track, find places of interest and manage your trips!</h3>
+    </section>
+
+
+    <section class="row ">
+        <input type="button" value="Let's go!" class="btn btn-trip btn-lg" onclick="location.href='@Url.Action("Login","Account")'" />
+    </section>
+
 </div>
-
-<section >
-    <h3>Welcome to My Trips, the place to track, find places of interest and manage your trips!</h3>
-</section>
-
-
-<section class="row ">
-    <input type="button" value="Let's go!" class="btn btn-info btn-lg" onclick="location.href='@Url.Action("Login","Account")'" />
-</section>

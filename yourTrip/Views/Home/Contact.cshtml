@@ -1,19 +1,23 @@
 ﻿@{
     ViewBag.Title = "Contact";
+    ViewBag.Subtitle = "You want to contac us,";
+    ViewBag.SubtitleTwo = " here are our vias";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
+<div class="container body-content backCover reflector">
+    <h2>@ViewBag.Title.</h2>
+    <h3>@ViewBag.Subtitle</h3>
+    <h3>@ViewBag.SubtitleTwo</h3>
 
-<p>Ya saben quien soy, mandame un whatsapp.</p>
-<p>Si caiste aca por casualidad, cómo hiciste para encontrarme?</p>
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+    <br />
+    <address>
+        Maggie Fortelli<br />
+        <a href="mailto:fortellimaria@gmail.com">Enviar Mail</a>
+        <a href="#">Otro Link?</a>
+    </address>
 
-<address>
-    <strong>Support:</strong><a href="mailto:">Support</a><br />
-</address>
+    <address>
+        Meli Erizaga<br />
+        <a href="mailto:meli.erizaga@outlook.com">Enviar Mail</a>
+    </address>
+</div>

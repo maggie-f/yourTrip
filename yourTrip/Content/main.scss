@@ -1,0 +1,118 @@
+﻿$primary-color: #7F2852;
+$secundary-color: #AE84A0;
+$black: #0A0A18;
+$blue-gray: #B2B3B2;
+$third-color: #EED1E2;
+
+$title-color: #f6e5ee;
+$dark-gray: #808080 ;
+
+$white: #ffffff;
+
+body {
+}
+* {
+    box-sizing: border-box;
+}
+figure {
+    margin: 0;
+}
+a{
+    color: $primary-color;
+    &:hover{
+        color:$secundary-color;
+    }
+}
+.navbar-trip {
+    background-color: $primary-color;
+    border-color: #e7e7e7;
+
+    a {
+        color: $title-color;
+
+        &:hover {
+            color: $dark-gray;
+        }
+    }
+}
+
+.title {
+    color: $title-color;
+}
+
+.btn-trip {
+    color: $white;
+    background-color: $secundary-color;
+    border-color: $secundary-color;
+}
+
+.btn-trip:hover,
+.btn-trip:focus,
+.btn-trip:active,
+.btn-trip.active,
+.open .dropdown-toggle.btn-trip {
+    color: $white;
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+
+.btn-trip:active,
+.btn-trip.active,
+.open .dropdown-toggle.btn-trip {
+    background-image: none;
+}
+
+.btn-trip.disabled,
+.btn-trip[disabled],
+fieldset[disabled] .btn-trip,
+.btn-trip.disabled:hover,
+.btn-trip[disabled]:hover,
+fieldset[disabled] .btn-trip:hover,
+.btn-trip.disabled:focus,
+.btn-trip[disabled]:focus,
+fieldset[disabled] .btn-trip:focus,
+.btn-trip.disabled:active,
+.btn-trip[disabled]:active,
+fieldset[disabled] .btn-trip:active,
+.btn-trip.disabled.active,
+.btn-trip[disabled].active,
+fieldset[disabled] .btn-trip.active {
+    background-color: $primary-color;
+    border-color: $primary-color;
+}
+.panel-trip {
+    border-color: $secundary-color;
+
+    .panel-heading {
+        color: $primary-color;
+        background-color: $third-color;
+        border-color: $secundary-color;
+    }
+
+    .panel-collapse .panel-body {
+        border-top-color: $secundary-color;
+    }
+
+    .panel-collapse .panel-body {
+        border-bottom-color: $third-color;
+    }
+}
+%cover-shared {
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 478px;
+}
+.rute {
+    @extend %cover-shared;
+    background-image: url(../img/ruta.jpg);
+}
+
+.brige {
+    @extend %cover-shared;
+    background-image: url(../img/puente2.jpg);
+}
+
+.reflector {
+    @extend %cover-shared;
+    background-image: url(../img/ojoPez.JPG);
+}

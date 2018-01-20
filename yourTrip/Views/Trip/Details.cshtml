@@ -4,9 +4,8 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div>
+<div class="container body-content">
+    <h2>Details</h2>
     <h4>TripModels</h4>
     <hr />
     <dl class="dl-horizontal">
@@ -43,16 +42,17 @@
         </dd>
 
         @*<dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
+                @Html.DisplayNameFor(model => model.UserId)
+            </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>*@
+            <dd>
+                @Html.DisplayFor(model => model.UserId)
+            </dd>*@
 
     </dl>
+
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
 </div>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
