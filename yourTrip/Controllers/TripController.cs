@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.EntityFramework;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -20,9 +22,21 @@ namespace yourTrip.Controllers
         // GET: Trip
         public ActionResult Index()
         {
-            var trips = _repo.Get();
-            
-            return View(trips);
+            try
+            {
+                if (Request.IsAuthenticated)
+                {
+                    string userId = User.Identity.GetUserId();
+                    var trips = _repo.Get(userId);
+
+                    return View(trips);
+                }
+            }
+            catch
+            {
+                //LOG
+            }
+            return View();
         }
 
         // GET: Trip/Details/5
@@ -47,6 +61,9 @@ namespace yourTrip.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                    var currentUser = manager.FindById(User.Identity.GetUserId());
+                    model.UserId = User.Identity.GetUserId();
                     _repo.Create(model);
                     return RedirectToAction("Index");
                 }

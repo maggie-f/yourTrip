@@ -9,11 +9,16 @@ namespace yourTrip.Services
     public class TripRepository
     {
 
-        public List<TripModels> Get()
+        public IList<TripModels> Get(string userId)
         {
             using (var db = new ApplicationDbContext())
             {
-                return db.Trips.ToList();
+                //var trips = from t in db.Trips
+                //            where t.UserId.Equals(userId)
+                //            select t;
+                //trips.ToList();
+
+                return db.Trips.Where(x => x.UserId == userId).ToList();
             }
         }
 

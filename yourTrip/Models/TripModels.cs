@@ -13,17 +13,19 @@ namespace yourTrip.Models
         public int Id { get; set; }
         [Required]
         [StringLength(250)]
-        public string Location { get; set; }
+        public string Destination { get; set; }
         [StringLength(50)]
         public string Latitud { get; set; }
         [StringLength(50)]
         public string Longitud { get; set; }
         [Required]
         public DateTime Departure { get; set; }
-
-        //[StringLength(128)]
-        //public string UserId { get; set; }
-        //[ForeignKey(name: "AspNetUsersID")]
-        //public ApplicationUser ApplicationUser { get; set; }
+        [Required]
+        [StringLength(128)]
+        public string UserId { get; set; }
+        [ForeignKey(name: "UserId")]
+        public ApplicationUser ApplicationUser { get; set; }
+        [Required]
+        public DateTime Created { get; set; }
     }
 }
