@@ -18,6 +18,10 @@ namespace yourTrip.Models
         public string Latitud { get; set; }
         [StringLength(50)]
         public string Longitud { get; set; }
+        public int? Zoom { get; set; }
+        [Required]
+        [StringLength(250)]
+        public string PlaceId { get; set; }
         [Required]
         public DateTime Departure { get; set; }
         [Required]

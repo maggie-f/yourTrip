@@ -57,20 +57,23 @@ namespace yourTrip.Controllers
         [HttpPost]
         public ActionResult Create(TripModels model)
         {
+            ViewBag.HasErrors = false;
             try
             {
-                if (ModelState.IsValid)
-                {
-                    var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                    var currentUser = manager.FindById(User.Identity.GetUserId());
-                    model.UserId = User.Identity.GetUserId();
-                    _repo.Create(model);
-                    return RedirectToAction("Index");
-                }
+                //TODO: Chequear porque el model.isValid no funciona y hacer que funcione =)
+                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
+                var currentUser = manager.FindById(User.Identity.GetUserId());
+                model.UserId = User.Identity.GetUserId();
+                //TODO: convertir la fecha a UTCs
+                model.Created = DateTime.UtcNow;
+                _repo.Create(model);
+                return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
                 //Log
+                ViewBag.InnerException = ex.Message;
+                ViewBag.HasErrors = true;
             }
             return View(model);
         }
