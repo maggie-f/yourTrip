@@ -4,7 +4,7 @@
     ViewBag.Title = "Create";
     ViewBag.Latitud = "15";
     ViewBag.Longitud = "0";
-    ViewBag.Zoom = "1";
+    ViewBag.Zoom = "2";
     ViewBag.Error = ViewBag.HasErrors ? "display:block;" : "display:none;";
 }
 <div class="container body-content">
@@ -50,21 +50,19 @@
                 @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div id="locationField">
-                        @*<input id="autocomplete" placeholder="Witch city are you going?" type="text" />*@
-                        @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control controls", @type = "text", placeholder = "Witch city are you going?" } })
-
+                        @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control", @type = "text", placeholder = "Witch city are you going?" } })
                     </div>
-         
+                      <br />
                     <div id="map"></div>
-
                 </div>
             </div>
 
             <div class="alert alert-danger alert-dismissible" role="alert" style="@ViewBag.Error">
                 @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(model => model.Departure, "", new { @class = "text-danger" })
+                @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger", @value = @ViewBag.InnerException })
             </div>
-            @ViewBag.InnerException
+            
 
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -118,7 +116,7 @@
         </div>
     </div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     var map, places, infoWindow, place, marker;
     var markers = [];
     var autocomplete;
@@ -126,13 +124,13 @@
     var hostnameRegexp = new RegExp('^https?://.+?/');
 
     function initMap() {
-    map = new google.maps.Map(document.getElementById('map'), {
-        zoom: @ViewBag.Zoom,
-        center: { lat: @ViewBag.Latitud, lng: @ViewBag.Longitud },
-        mapTypeControl: false,
-        panControl: false,
-        zoomControl: true,
-        streetViewControl: false
+        map = new google.maps.Map(document.getElementById('map'), {
+            zoom: @ViewBag.Zoom,
+            center: { lat: @ViewBag.Latitud, lng: @ViewBag.Longitud },
+            mapTypeControl: false,
+            panControl: false,
+            zoomControl: true,
+            streetViewControl: false
     });
 
     infoWindow = new google.maps.InfoWindow({
@@ -149,9 +147,6 @@
     places = new google.maps.places.PlacesService(map);
 
     autocomplete.addListener('place_changed', onPlaceChanged);
-
-    // Add a DOM event listener to react when the user selects a country.
-    //document.getElementById('country').addEventListener('change', setAutocompleteCountry);
     }
 
     function toggleBounce() {
@@ -165,9 +160,7 @@
     function putPin(place) {
         clearResults();
         clearMarkers();
-
-        map.zoom = 11;
-
+        map.setZoom(11)
         marker = new google.maps.Marker({
             map: map,
             draggable: true,
@@ -184,16 +177,16 @@
         //    image.setAttribute("src", place.photos.);
         //}
         }
-        function completeData(place) {
-            var placeId = document.getElementById("placeId");
-            placeId.value = place.place_id;
+    function completeData(place) {
+        var placeId = document.getElementById("placeId");
+        placeId.value = place.place_id;
 
-            var latitud = document.getElementById("latitud");
-            latitud.value = place.geometry.location.lat();
+        var latitud = document.getElementById("latitud");
+        latitud.value = place.geometry.location.lat();
 
-            var longitud = document.getElementById("longitud");
-            longitud.value = place.geometry.location.lng();
-        }
+        var longitud = document.getElementById("longitud");
+        longitud.value = place.geometry.location.lng();
+    }
 
     // When the user selects a city, get the place details for the city and
     // zoom the map in on the city.
@@ -202,7 +195,6 @@
         place = autocomplete.getPlace();
         if (place.geometry) {
             map.panTo(place.geometry.location);
-            map.zoom = 11;
             putPin(place);
             putImages(place);
             completeData(place);
@@ -257,126 +249,115 @@
 
     // Set the country restriction based on user input.
     // Also center and zoom the map on the given country.
-        function setAutocompleteCountry() {
+    function setAutocompleteCountry() {
         var country = document.getElementById('country').value;
         autocomplete.setComponentRestrictions({ 'country': [] });
         map.setCenter({ lat: 15, lng: 0 });
-        map.setZoom(2);
-
-        //if (country == 'all') {
-        //  autocomplete.setComponentRestrictions({'country': []});
-        //  map.setCenter({lat: 15, lng: 0});
-        //  map.setZoom(2);
-        //} else {
-        //  autocomplete.setComponentRestrictions({'country': country});
-        //  map.setCenter(countries[country].center);
-        //  map.setZoom(countries[country].zoom);
-        //}
         clearResults();
         clearMarkers();
-        }
+    }
 
-        function dropMarker(i) {
+    function dropMarker(i) {
         return function() {
             markers[i].setMap(map);
         };
-        }
+    }
 
-        function addResult(result, i) {
-        var results = document.getElementById('results');
-        var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
-        var markerIcon = MARKER_PATH + markerLetter + '.png';
+    function addResult(result, i) {
+    var results = document.getElementById('results');
+    var markerLetter = String.fromCharCode('A'.charCodeAt(0) + (i % 26));
+    var markerIcon = MARKER_PATH + markerLetter + '.png';
 
-        var tr = document.createElement('tr');
-        tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
-        tr.onclick = function() {
-            google.maps.event.trigger(markers[i], 'click');
-        };
+    var tr = document.createElement('tr');
+    tr.style.backgroundColor = (i % 2 === 0 ? '#F0F0F0' : '#FFFFFF');
+    tr.onclick = function() {
+        google.maps.event.trigger(markers[i], 'click');
+    };
 
-        var iconTd = document.createElement('td');
-        var nameTd = document.createElement('td');
-        var icon = document.createElement('img');
-        icon.src = markerIcon;
-        icon.setAttribute('class', 'placeIcon');
-        icon.setAttribute('className', 'placeIcon');
-        var name = document.createTextNode(result.name);
-        iconTd.appendChild(icon);
-        nameTd.appendChild(name);
-        tr.appendChild(iconTd);
-        tr.appendChild(nameTd);
-        results.appendChild(tr);
-        }
+    var iconTd = document.createElement('td');
+    var nameTd = document.createElement('td');
+    var icon = document.createElement('img');
+    icon.src = markerIcon;
+    icon.setAttribute('class', 'placeIcon');
+    icon.setAttribute('className', 'placeIcon');
+    var name = document.createTextNode(result.name);
+    iconTd.appendChild(icon);
+    nameTd.appendChild(name);
+    tr.appendChild(iconTd);
+    tr.appendChild(nameTd);
+    results.appendChild(tr);
+    }
 
-        function clearResults() {
-        var results = document.getElementById('results');
-        while (results.childNodes[0]) {
-            results.removeChild(results.childNodes[0]);
-        }
-        }
+    function clearResults() {
+    var results = document.getElementById('results');
+    while (results.childNodes[0]) {
+        results.removeChild(results.childNodes[0]);
+    }
+    }
 
-        // Get the place details for a hotel. Show the information in an info window,
-        // anchored on the marker for the hotel that the user selected.
-        function showInfoWindow() {
-        var marker = this;
-        places.getDetails({placeId: marker.placeResult.place_id},
-            function(place, status) {
-                if (status !== google.maps.places.PlacesServiceStatus.OK) {
-                return;
-                }
-                infoWindow.open(map, marker);
-                buildIWContent(place);
-            });
-        }
-
-        // Load the place information into the HTML elements used by the info window.
-        function buildIWContent(place) {
-            document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
-                'src="' + place.icon + '"/>';
-            document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
-                '">' + place.name + '</a></b>';
-            document.getElementById('iw-address').textContent = place.vicinity;
-
-            if (place.formatted_phone_number) {
-                document.getElementById('iw-phone-row').style.display = '';
-                document.getElementById('iw-phone').textContent =
-                    place.formatted_phone_number;
-            } else {
-                document.getElementById('iw-phone-row').style.display = 'none';
+    // Get the place details for a hotel. Show the information in an info window,
+    // anchored on the marker for the hotel that the user selected.
+    function showInfoWindow() {
+    var marker = this;
+    places.getDetails({placeId: marker.placeResult.place_id},
+        function(place, status) {
+            if (status !== google.maps.places.PlacesServiceStatus.OK) {
+            return;
             }
+            infoWindow.open(map, marker);
+            buildIWContent(place);
+        });
+    }
 
-            // Assign a five-star rating to the hotel, using a black star ('&#10029;')
-            // to indicate the rating the hotel has earned, and a white star ('&#10025;')
-            // for the rating points not achieved.
-            if (place.rating) {
-                var ratingHtml = '';
-                for (var i = 0; i < 5; i++) {
-                if (place.rating < (i + 0.5)) {
-                    ratingHtml += '&#10025;';
-                } else {
-                    ratingHtml += '&#10029;';
-                }
-                document.getElementById('iw-rating-row').style.display = '';
-                document.getElementById('iw-rating').innerHTML = ratingHtml;
-                }
-            } else {
-                document.getElementById('iw-rating-row').style.display = 'none';
-            }
+    // Load the place information into the HTML elements used by the info window.
+    function buildIWContent(place) {
+        document.getElementById('iw-icon').innerHTML = '<img class="hotelIcon" ' +
+            'src="' + place.icon + '"/>';
+        document.getElementById('iw-url').innerHTML = '<b><a href="' + place.url +
+            '">' + place.name + '</a></b>';
+        document.getElementById('iw-address').textContent = place.vicinity;
 
-            // The regexp isolates the first part of the URL (domain plus subdomain)
-            // to give a short URL for displaying in the info window.
-            if (place.website) {
-                var fullUrl = place.website;
-                var website = hostnameRegexp.exec(place.website);
-                if (website === null) {
-                website = 'http://' + place.website + '/';
-                fullUrl = website;
-                }
-                document.getElementById('iw-website-row').style.display = '';
-                document.getElementById('iw-website').textContent = website;
-            } else {
-                document.getElementById('iw-website-row').style.display = 'none';
-            }
+        if (place.formatted_phone_number) {
+            document.getElementById('iw-phone-row').style.display = '';
+            document.getElementById('iw-phone').textContent =
+                place.formatted_phone_number;
+        } else {
+            document.getElementById('iw-phone-row').style.display = 'none';
         }
+
+        // Assign a five-star rating to the hotel, using a black star ('&#10029;')
+        // to indicate the rating the hotel has earned, and a white star ('&#10025;')
+        // for the rating points not achieved.
+        if (place.rating) {
+            var ratingHtml = '';
+            for (var i = 0; i < 5; i++) {
+            if (place.rating < (i + 0.5)) {
+                ratingHtml += '&#10025;';
+            } else {
+                ratingHtml += '&#10029;';
+            }
+            document.getElementById('iw-rating-row').style.display = '';
+            document.getElementById('iw-rating').innerHTML = ratingHtml;
+            }
+        } else {
+            document.getElementById('iw-rating-row').style.display = 'none';
+        }
+
+        // The regexp isolates the first part of the URL (domain plus subdomain)
+        // to give a short URL for displaying in the info window.
+        if (place.website) {
+            var fullUrl = place.website;
+            var website = hostnameRegexp.exec(place.website);
+            if (website === null) {
+            website = 'http://' + place.website + '/';
+            fullUrl = website;
+            }
+            document.getElementById('iw-website-row').style.display = '';
+            document.getElementById('iw-website').textContent = website;
+        } else {
+            document.getElementById('iw-website-row').style.display = 'none';
+        }
+    }
     </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
 </div>

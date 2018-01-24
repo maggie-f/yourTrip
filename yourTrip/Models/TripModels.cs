@@ -27,8 +27,8 @@ namespace yourTrip.Models
         [Required]
         [StringLength(128)]
         public string UserId { get; set; }
-        [ForeignKey(name: "UserId")]
-        public ApplicationUser ApplicationUser { get; set; }
+        //[ForeignKey(name: "UserId")]
+        //public ApplicationUser ApplicationUser { get; set; }
         [Required]
         public DateTime Created { get; set; }
     }

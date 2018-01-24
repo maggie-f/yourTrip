@@ -50,6 +50,7 @@ namespace yourTrip.Controllers
         // GET: Trip/Create
         public ActionResult Create()
         {
+            ViewBag.HasErrors = false;
             return View();
         }
 
@@ -65,6 +66,7 @@ namespace yourTrip.Controllers
                 var currentUser = manager.FindById(User.Identity.GetUserId());
                 model.UserId = User.Identity.GetUserId();
                 //TODO: convertir la fecha a UTCs
+                model.Departure = model.Departure.ToUniversalTime();
                 model.Created = DateTime.UtcNow;
                 _repo.Create(model);
                 return RedirectToAction("Index");

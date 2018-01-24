@@ -2,36 +2,111 @@
 
 @{
     ViewBag.Title = "Details";
+    var destination = Model.Destination.ToString().Replace(' ', '+');
 }
-
+<link href="~/Content/main.css" rel="stylesheet" />
 <div class="container body-content">
-    <h2>Details</h2>
-    <h4>TripModels</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.Destination)
-        </dt>
+    <h2>Your trip start in</h2>
+    <div class="row">
+        <div class="col-md-6">
+            <div id="clockdiv" class="row">
+                <div class="col-sm-1">
+                    <span class="days"></span>
+                    <div class="smalltext">Days</div>
+                </div>
+                <div class="col-sm-1">
+                    <span class="hours"></span>
+                    <div class="smalltext">Hours</div>
+                </div>
+                <div class="col-sm-1">
+                    <span class="minutes"></span>
+                    <div class="smalltext">Minutes</div>
+                </div>
+                <div class="col-sm-1">
+                    <span class="seconds"></span>
+                    <div class="smalltext">Seconds</div>
+                </div>
+            </div>
 
-        <dd>
-            @Html.DisplayFor(model => model.Destination)
-        </dd>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.Destination)
+                </dt>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Departure)
-        </dt>
+                <dd>
+                    @Html.DisplayFor(model => model.Destination)
+                </dd>
 
-        <dd>
-            @Html.DisplayFor(model => model.Departure)
-        </dd>
-    </dl>
+                <dt>
+                    @Html.DisplayNameFor(model => model.Departure)
+                </dt>
 
-    <p>
-        @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-        @Html.ActionLink("Back to List", "Index")
-    </p>
+                <dd>
+                    @Html.DisplayFor(model => model.Departure)
+                </dd>
+            </dl>
 
-    <div id="findhotels">
+            <p>
+                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+                @Html.ActionLink("Back to List", "Index")
+            </p>
+        </div>
+        <div class="col-md-6">
+            <iframe frameborder="0" class="detailMap"
+                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw
+                &q=@destination" allowfullscreen></iframe>
+        </div>
+    </div>
+
+  
+    
+
+    <script type="text/javascript">
+        function getTimeRemaining(endtime) {
+            var t = Date.parse(endtime) - Date.parse(new Date());
+            var seconds = Math.floor((t / 1000) % 60);
+            var minutes = Math.floor((t / 1000 / 60) % 60);
+            var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
+            var days = Math.floor(t / (1000 * 60 * 60 * 24));
+            return {
+                'total': t,
+                'days': days,
+                'hours': hours,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+
+        function initializeClock(id, endtime) {
+            var clock = document.getElementById(id);
+            var daysSpan = clock.querySelector('.days');
+            var hoursSpan = clock.querySelector('.hours');
+            var minutesSpan = clock.querySelector('.minutes');
+            var secondsSpan = clock.querySelector('.seconds');
+
+            function updateClock() {
+                var t = getTimeRemaining(endtime);
+
+                daysSpan.innerHTML = t.days;
+                hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
+                minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                }
+            }
+
+            updateClock();
+            var timeinterval = setInterval(updateClock, 1000);
+        }
+        var month = @Model.Departure.Month - 1;
+        var deadline = new Date(Date.UTC(@Model.Departure.Year, month, @Model.Departure.Day, @Model.Departure.Hour, @Model.Departure.Minute, @Model.Departure.Millisecond));
+        initializeClock('clockdiv', deadline);
+    </script>
+    
+    @*<div id="findhotels">
         Find hotels in:
     </div>
 
@@ -308,20 +383,5 @@
       }
     </script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap"
-            async defer></script>
-
-    <iframe width="600"
-            height="450"
-            frameborder="0" style="border:0"
-            src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw
-    &q=México,+CDMX,+México" allowfullscreen></iframe>
-
-    @*<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d53608.97749197301!2d-68.89353869804404!3d-32.883330320468694!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e093ec45179bf%3A0x205a78f6d20efa3a!2sMendoza%2C+Capital%2C+Provincia+de+Mendoza!5e0!3m2!1ses-419!2sar!4v1516711613151" width="600" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>*@
-
-
-
-    @* Links para chequear:
-        https://developers.google.com/maps/documentation/embed/guide#optional_parameters
-        https://developers.google.com/maps/documentation/javascript/examples/marker-animations
-    *@
+            async defer></script>*@
 </div>
