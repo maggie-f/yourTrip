@@ -125,21 +125,13 @@ fieldset[disabled] .btn-trip.active {
     height: 100%;
 }
 /* Optional: Makes the sample page fill the window. */
-html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-}
-
 table {
     font-size: 12px;
 }
-
 #map {
     width: 440px;
     height: 300px;
 }
-
 #listing {
     width: 200px;
     height: 470px;
@@ -147,7 +139,6 @@ table {
     cursor: pointer;
     overflow-x: hidden;
 }
-
 #findhotels {
     text-align: right;
     width: 100px;
@@ -156,50 +147,29 @@ table {
     z-index: 5;
     background-color: #fff;
 }
-
-#locationField {
-    width: 190px;
-    height: 25px;
-    z-index: 5;
-    background-color: #fff;
-}
-
 #controls {
     left: 300px;
     width: 140px;
     z-index: 5;
     background-color: #fff;
 }
-
-#autocomplete {
-    width: 400px;
-}
-
-#country {
-    width: 100%;
-}
-
 .placeIcon {
     width: 20px;
     height: 34px;
     margin: 4px;
 }
-
 .hotelIcon {
     width: 24px;
     height: 24px;
 }
-
 #resultsTable {
     border-collapse: collapse;
     width: 440px;
 }
-
 #rating {
     font-size: 13px;
     font-family: Arial Unicode MS;
 }
-
 .iw_table_row {
     height: 18px;
 }
@@ -208,14 +178,18 @@ table {
     font-weight: bold;
     text-align: right;
 }
-
 .iw_table_icon {
     text-align: right;
 }
-.detailMap{
+.detailMap {
     border: 0;
     width: 100%;
+    min-height: 400px;
 }
+
 // END GOOGLE MAPS
 
 // CLOCK
+#clockdiv {
+    font-family: 'Bungee Hairline', cursive;
+}

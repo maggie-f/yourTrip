@@ -88,11 +88,6 @@ fieldset[disabled] .btn-trip.active {
   height: 100%; }
 
 /* Optional: Makes the sample page fill the window. */
-html, body {
-  height: 100%;
-  margin: 0;
-  padding: 0; }
-
 table {
   font-size: 12px; }
 
@@ -115,23 +110,11 @@ table {
   z-index: 5;
   background-color: #fff; }
 
-#locationField {
-  width: 190px;
-  height: 25px;
-  z-index: 5;
-  background-color: #fff; }
-
 #controls {
   left: 300px;
   width: 140px;
   z-index: 5;
   background-color: #fff; }
-
-#autocomplete {
-  width: 400px; }
-
-#country {
-  width: 100%; }
 
 .placeIcon {
   width: 20px;
@@ -159,4 +142,12 @@ table {
 
 .iw_table_icon {
   text-align: right; }
+
+.detailMap {
+  border: 0;
+  width: 100%;
+  min-height: 400px; }
+
+#clockdiv {
+  font-family: 'Bungee Hairline', cursive; }
 

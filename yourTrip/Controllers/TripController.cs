@@ -19,15 +19,17 @@ namespace yourTrip.Controllers
         {
             _repo = new TripRepository();
         }
+
         // GET: Trip
-        public ActionResult Index()
+        public ActionResult Index(bool future = true)
         {
             try
             {
+                ViewBag.IsFuture = future ? "1" : "0";
                 if (Request.IsAuthenticated)
                 {
-                    string userId = User.Identity.GetUserId();
-                    var trips = _repo.Get(userId);
+                    IList<TripModels> trips = _repo.Get(GetUserId(), future);
+                    ViewBag.Trip = _repo.GetNextTrip(GetUserId());
 
                     return View(trips);
                 }
@@ -42,15 +44,16 @@ namespace yourTrip.Controllers
         // GET: Trip/Details/5
         public ActionResult Details(int id)
         {
-            var trips = _repo.Get(id);
-
-            return View(trips);
+            TripModels trip = _repo.Get(id);
+            ViewBag.Trip = trip;
+            return View(trip);
         }
 
         // GET: Trip/Create
         public ActionResult Create()
         {
             ViewBag.HasErrors = false;
+            ViewBag.Trip = _repo.GetNextTrip(GetUserId());
             return View();
         }
 
@@ -62,9 +65,7 @@ namespace yourTrip.Controllers
             try
             {
                 //TODO: Chequear porque el model.isValid no funciona y hacer que funcione =)
-                var manager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(new ApplicationDbContext()));
-                var currentUser = manager.FindById(User.Identity.GetUserId());
-                model.UserId = User.Identity.GetUserId();
+                model.UserId = GetUserId();
                 //TODO: convertir la fecha a UTCs
                 model.Departure = model.Departure.ToUniversalTime();
                 model.Created = DateTime.UtcNow;
@@ -145,6 +146,11 @@ namespace yourTrip.Controllers
             {
                 return View();
             }
+        }
+
+        private string GetUserId()
+        {
+            return User.Identity.GetUserId();
         }
     }
 }

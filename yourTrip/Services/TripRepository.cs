@@ -9,7 +9,7 @@ namespace yourTrip.Services
     public class TripRepository
     {
 
-        public IList<TripModels> Get(string userId)
+        internal IList<TripModels> Get(string userId, bool future)
         {
             using (var db = new ApplicationDbContext())
             {
@@ -17,8 +17,10 @@ namespace yourTrip.Services
                 //            where t.UserId.Equals(userId)
                 //            select t;
                 //trips.ToList();
+                if(!future)
+                    return db.Trips.Where(x => x.UserId == userId).Where(x => x.Departure < DateTime.UtcNow).ToList();
 
-                return db.Trips.Where(x => x.UserId == userId).ToList();
+                return db.Trips.Where(x => x.UserId == userId).Where(x => x.Departure >= DateTime.UtcNow).ToList();
             }
         }
 
@@ -55,6 +57,16 @@ namespace yourTrip.Services
                 var trip = db.Trips.First(x => x.Id == id);
                 db.Trips.Remove(trip);
                 db.SaveChanges();
+            }
+        }
+
+        internal TripModels GetNextTrip(string userId)
+        {
+            using(var db = new ApplicationDbContext())
+            {
+                TripModels trip = db.Trips.Where(x => x.UserId == userId).Where(x => x.Departure >= DateTime.UtcNow).OrderByDescending(x => x.Departure).FirstOrDefault();
+
+                return trip;
             }
         }
     }

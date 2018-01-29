@@ -9,7 +9,9 @@
 }
 <div class="container body-content">
     <h2>First step to plan your trip</h2>
-
+    <div>
+        @Html.ActionLink("Back to List", "Index")
+    </div>
     <div class="row">
         @using (Html.BeginForm())
         {
@@ -52,9 +54,17 @@
                     <div id="locationField">
                         @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control", @type = "text", placeholder = "Witch city are you going?" } })
                     </div>
-                      <br />
-                    <div id="map"></div>
                 </div>
+            </div>
+            
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div id="map"></div>
             </div>
 
             <div class="alert alert-danger alert-dismissible" role="alert" style="@ViewBag.Error">
@@ -62,13 +72,7 @@
                 @Html.ValidationMessageFor(model => model.Departure, "", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger", @value = @ViewBag.InnerException })
             </div>
-            
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Create" class="btn btn-default" />
-                </div>
-            </div>
         </div>
         }
 
@@ -76,13 +80,13 @@
             <div id="mapsImages"></div>
         </div>
     </div>
-    
+
 
     <div>
         @Html.ActionLink("Back to List", "Index")
     </div>
 
-    <!-- Maps Stuff --> 
+    <!-- Maps Stuff -->
     <div id="listing">
         <table id="resultsTable">
             <tbody id="results"></tbody>
@@ -116,7 +120,7 @@
         </div>
     </div>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     var map, places, infoWindow, place, marker;
     var markers = [];
     var autocomplete;
@@ -359,7 +363,7 @@
         }
     }
     </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
 </div>
 
 @section Scripts {
