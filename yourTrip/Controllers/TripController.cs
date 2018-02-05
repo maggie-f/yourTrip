@@ -8,10 +8,17 @@ using System.Web.Mvc;
 using yourTrip.Models;
 using yourTrip.Services;
 
+using System.Net;
+using System.Net.Http;
+using System.Net.Http.Headers;
+using System.Threading.Tasks;
+using System.Configuration;
+
 namespace yourTrip.Controllers
 {
     public class TripController : Controller
     {
+        static HttpClient client = new HttpClient();
 
         private TripRepository _repo;
 
@@ -29,12 +36,14 @@ namespace yourTrip.Controllers
                 if (Request.IsAuthenticated)
                 {
                     IList<TripModels> trips = _repo.Get(GetUserId(), future);
-                    ViewBag.Trip = _repo.GetNextTrip(GetUserId());
+                    TripModels trip = _repo.GetNextTrip(GetUserId());
+                    if(trip != null && trip.Id > 0) 
+                        ViewBag.Date = trip.Departure.ToString("yyyy/MM/dd");
 
                     return View(trips);
                 }
             }
-            catch
+            catch(Exception ex)
             {
                 //LOG
             }
@@ -46,6 +55,8 @@ namespace yourTrip.Controllers
         {
             TripModels trip = _repo.Get(id);
             ViewBag.Trip = trip;
+            ViewBag.Date = trip.Departure.ToString("yyyy/MM/dd");
+
             return View(trip);
         }
 

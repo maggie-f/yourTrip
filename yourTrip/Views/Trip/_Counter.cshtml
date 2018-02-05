@@ -1,89 +1,26 @@
-﻿@{
-    bool haveTrip;
-    haveTrip = ViewBag.Trip != null ? true : false;
-}
+﻿
 <link href="https://fonts.googleapis.com/css?family=Bungee+Hairline|Lobster" rel="stylesheet">
-@if (haveTrip)
+
+<script src="~/Scripts/clock/jquery-3.2.1.min.js"></script>
+<script src="~/Scripts/clock/jquery.countdown.js"></script>
+
+@if (!string.IsNullOrEmpty(ViewBag.Date))
 {
-    <div>
-        Your next trip to @ViewBag.Trip.Destination start in:
-    </div>
-    <div id="clockdiv" class="row">
-        <div class="col-sm-2">
-            <span class="months"></span>
-            <div class="smalltext">Months</div>
-        </div>
-        <div class="col-sm-2">
-            <span class="days"></span>
-            <div class="smalltext">Days</div>
-        </div>
-        <div class="col-sm-2">
-            <span class="hours"></span>
-            <div class="smalltext">Hours</div>
-        </div>
-        <div class="col-sm-2">
-            <span class="minutes"></span>
-            <div class="smalltext">Minutes</div>
-        </div>
-        <div class="col-sm-2">
-            <span class="seconds"></span>
-            <div class="smalltext">Seconds</div>
-        </div>
-    </div>
+    <div id="clock"></div>
+    <script>
+        $('#clock').countdown('@ViewBag.Date', function (event) {
+            var $this = $(this).html(event.strftime(''
+                + '<span>%w</span> weeks '
+                + '<span>%d</span> days '
+                + '<span>%H</span> hr '
+                + '<span>%M</span> min '
+                + '<span>%S</span> sec'));
+        });
+    </script>
 }
 else
 {
-    <div>
-        You don't have any incomming trip. <br />
+    <div> You don't have any incomming trip. <br />
         @Html.ActionLink("Let's create one!", "Create", "Trip")
     </div>
 }
-
-<script type="text/javascript">
-function getTimeRemaining(endtime) {
-    var t = Date.parse(endtime) - Date.parse(new Date());
-    var seconds = Math.floor((t / 1000) % 60);
-    var minutes = Math.floor((t / 1000 / 60) % 60);
-    var hours = Math.floor((t / (1000 * 60 * 60)) % 24);
-    var days = Math.floor(t / (1000 * 60 * 60 * 24));
-    var month = Math.floor(t / (1000 * 60 * 60 * 24 * 30))
-    return {
-        'total': t,
-        'month': month,
-        'days': days,
-        'hours': hours,
-        'minutes': minutes,
-        'seconds': seconds
-    };
-}
-
-function initializeClock(id, endtime) {
-    var clock = document.getElementById(id);
-    var monthsSpan = clock.querySelector('.months');
-    var daysSpan = clock.querySelector('.days');
-    var hoursSpan = clock.querySelector('.hours');
-    var minutesSpan = clock.querySelector('.minutes');
-    var secondsSpan = clock.querySelector('.seconds');
-
-    function updateClock() {
-        var t = getTimeRemaining(endtime);
-
-        daysSpan.innerHTML = t.days;
-        monthsSpan.innerHTML = t.month;
-        hoursSpan.innerHTML = ('0' + t.hours).slice(-2);
-        minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
-        secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-        if (t.total <= 0) {
-            clearInterval(timeinterval);
-        }
-    }
-
-    updateClock();
-    var timeinterval = setInterval(updateClock, 1000);
-    }
-
-var month = @ViewBag.Trip.Departure.Month - 1;
-var deadline = new Date(Date.UTC(@ViewBag.Trip.Departure.Year, month, @ViewBag.Trip.Departure.Day, @ViewBag.Trip.Departure.Hour, @ViewBag.Trip.Departure.Minute, @ViewBag.Trip.Departure.Millisecond));
-initializeClock('clockdiv', deadline);
-</script>

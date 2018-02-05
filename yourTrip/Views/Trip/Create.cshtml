@@ -19,24 +19,6 @@
 
         <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12 form-horizontal">
             <hr />
-            @*@Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitud, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitud, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitud, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitud, new { htmlAttributes = new { @class = "form-control" } })
-            </div>
-        </div>
-
-            @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "text-danger" })
-            @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "text-danger" })
-            *@
             <div class="form-group">
                 @Html.LabelFor(model => model.Departure, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
@@ -126,6 +108,7 @@
     var autocomplete;
     var MARKER_PATH = 'https://developers.google.com/maps/documentation/javascript/images/marker_green';
     var hostnameRegexp = new RegExp('^https?://.+?/');
+    var mapKey = "AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw";
 
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
@@ -144,7 +127,6 @@
     // Create the autocomplete object and associate it with the UI input control.
     // Restrict the search to the default country, and to place type "cities".
     autocomplete = new google.maps.places.Autocomplete(
-        /** type {!HTMLInputElement} */
         (document.getElementById('autocomplete')), {
             types: ['(cities)']
         });
@@ -175,12 +157,14 @@
     }
 
     function putImages(place) {
-        //var images = [];
-        //for (i = 0; i <= place.photos.length; i++){
-        //    var image = document.createElement("img");
-        //    image.setAttribute("src", place.photos.);
-        //}
-        }
+        var url = "https://maps.googleapis.com/maps/api/place/details/json?placeid=" + place.place_id + "&key=" + mapKey; 
+        var xhttp = new XMLHttpRequest();
+        xhttp.open("GET", url, true);
+        xhttp.setRequestHeader("Content-type", "application/json");
+        xhttp.send();
+        var response = JSON.parse(xhttp.responseText);
+    }
+
     function completeData(place) {
         var placeId = document.getElementById("placeId");
         placeId.value = place.place_id;
