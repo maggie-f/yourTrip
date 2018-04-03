@@ -1,152 +1,113 @@
 ﻿@model yourTrip.Models.DestinationModels
 
 @{
-    ViewBag.Title = "Create";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Let's add one or more destinations";
+    ViewBag.Latitud = "15";
+    ViewBag.Longitud = "0";
+    ViewBag.Zoom = "2";
+    //ViewBag.Error = ViewBag.HasErrors ? "display:block;" : "display:none;";
 }
+<div class="container body-content">
+    <h2>@ViewBag.Title</h2>
+    <div class="row">
+        @using (Html.BeginForm("Create", "Destination", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
 
-<h2>Create</h2>
+            <div class="col-sm-12">
+                <hr />
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Arrival, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Arrival, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Leave, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Leave, new { htmlAttributes = new { @class = "form-control" } })
+                    </div>
+                </div>
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>DestinationModels</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        <div class="form-group">
-            @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.PlaceId, htmlAttributes: new { @id = "placeId", @value = "" })
+                @Html.HiddenFor(model => model.Latitud, htmlAttributes: new { @id = "latitud", @value = "" })
+                @Html.HiddenFor(model => model.Longitud, htmlAttributes: new { @id = "longitud", @value = "" })
+                @Html.HiddenFor(model => model.TripRefId, htmlAttributes: new { @id = "tripRefId", @value = "" })
+                @Html.HiddenFor(model => model.Zoom, htmlAttributes: new { @id = "zoom", @value = "" })
+
+                <div class="form-group">
+                        @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-10">
+                            <div id="locationField">
+                                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control", @type = "text", placeholder = "Witch city are you going?" } })
+                            </div>
+                        </div>
+                    </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Create" class="btn btn-default" />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div id="map"></div>
+                </div>
+
+                <div class="alert alert-danger alert-dismissible" role="alert" style="@ViewBag.Error">
+                    @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Arrival, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model.Leave, "", new { @class = "text-danger" })
+                    @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger", @value = @ViewBag.InnerException })
+                </div>
+
             </div>
-        </div>
+        }
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Latitud, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Latitud, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Latitud, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Longitud, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Longitud, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Longitud, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Zoom, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Zoom, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Zoom, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.PlaceId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.PlaceId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PlaceId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Arrival, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Arrival, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Arrival, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Leave, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Leave, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Leave, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Created, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Created, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Created, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.Modified, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Modified, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Modified, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.UserId, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.UserId, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.UserId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(model => model.TripRefId, "TripRefId", htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.DropDownList("TripRefId", null, htmlAttributes: new { @class = "form-control" })
-                @Html.ValidationMessageFor(model => model.TripRefId, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
+        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+            <div id="mapsImages"></div>
         </div>
     </div>
-}
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
-<!-- Maps Stuff -->
-<div id="listing">
-    <table id="resultsTable">
-        <tbody id="results"></tbody>
-    </table>
-</div>
+    <div>
+        @Html.ActionLink("Return", "Index", "Trip")
+    </div>
 
-<div style="display: none">
-    <div id="info-content">
-        <table>
-            <tr id="iw-url-row" class="iw_table_row">
-                <td id="iw-icon" class="iw_table_icon"></td>
-                <td id="iw-url"></td>
-            </tr>
-            <tr id="iw-address-row" class="iw_table_row">
-                <td class="iw_attribute_name">Address:</td>
-                <td id="iw-address"></td>
-            </tr>
-            <tr id="iw-phone-row" class="iw_table_row">
-                <td class="iw_attribute_name">Telephone:</td>
-                <td id="iw-phone"></td>
-            </tr>
-            <tr id="iw-rating-row" class="iw_table_row">
-                <td class="iw_attribute_name">Rating:</td>
-                <td id="iw-rating"></td>
-            </tr>
-            <tr id="iw-website-row" class="iw_table_row">
-                <td class="iw_attribute_name">Website:</td>
-                <td id="iw-website"></td>
-            </tr>
+    <!-- Maps Stuff -->
+    <div id="listing">
+        <table id="resultsTable">
+            <tbody id="results"></tbody>
         </table>
     </div>
+
+    <div style="display: none">
+        <div id="info-content">
+            <table>
+                <tr id="iw-url-row" class="iw_table_row">
+                    <td id="iw-icon" class="iw_table_icon"></td>
+                    <td id="iw-url"></td>
+                </tr>
+                <tr id="iw-address-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Address:</td>
+                    <td id="iw-address"></td>
+                </tr>
+                <tr id="iw-phone-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Telephone:</td>
+                    <td id="iw-phone"></td>
+                </tr>
+                <tr id="iw-rating-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Rating:</td>
+                    <td id="iw-rating"></td>
+                </tr>
+                <tr id="iw-website-row" class="iw_table_row">
+                    <td class="iw_attribute_name">Website:</td>
+                    <td id="iw-website"></td>
+                </tr>
+            </table>
+        </div>
+    </div>
 </div>
+
 <script type="text/javascript">
     var map, places, infoWindow, place, marker;
     var markers = [];
@@ -219,6 +180,12 @@
 
         var longitud = document.getElementById("longitud");
         longitud.value = place.geometry.location.lng();
+
+        var trip = document.getElementById("tripRefId");
+        trip.value = @ViewBag.Trip;
+
+        var zoom = document.getElementById("zoom");
+        zoom.value = @ViewBag.Zoom;
     }
 
     // When the user selects a city, get the place details for the city and
@@ -229,7 +196,7 @@
         if (place.geometry) {
             map.panTo(place.geometry.location);
             putPin(place);
-            putImages(place);
+            //putImages(place);
             completeData(place);
             //map.setZoom();
             //search();
@@ -393,3 +360,7 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

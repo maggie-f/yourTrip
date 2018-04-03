@@ -28,6 +28,8 @@ namespace yourTrip.Models
     {
         public virtual DbSet<TripModels> Trips { get; set; }
 
+        public System.Data.Entity.DbSet<yourTrip.Models.DestinationModels> DestinationModels { get; set; }
+
         public ApplicationDbContext() : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
@@ -36,8 +38,6 @@ namespace yourTrip.Models
         {
             return new ApplicationDbContext();
         }
-
-        public System.Data.Entity.DbSet<yourTrip.Models.DestinationModels> DestinationModels { get; set; }
     }
 
 

@@ -78,10 +78,8 @@ namespace yourTrip.Controllers
                 //TODO: Chequear porque el model.isValid no funciona y hacer que funcione =)
                 model.UserRefId = GetUserId();
                 //TODO: convertir la fecha a UTCs
-                model.UserRefId = GetUserId();
-                model.Departure = DateTime.UtcNow;
-                model.Return = DateTime.UtcNow;
                 model.Created = DateTime.UtcNow;
+                model.Return = DateTime.UtcNow;
                 model.Modified = DateTime.UtcNow;
 
                 _repo.Create(model);

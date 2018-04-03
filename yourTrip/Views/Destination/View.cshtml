@@ -1,0 +1,38 @@
+﻿@model IEnumerable<yourTrip.Models.DestinationModels>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        @Html.Partial("_AddDestination", new yourTrip.Models.DestinationModels());
+    </div>
+</div>
+<div class="row">
+    <div class="col-sm-12">
+        @if (ViewBag.HasDestinations == 1)
+        {
+            <table>
+                <thead>
+                    <tr>
+                        <td>@Html.DisplayNameFor(model => model.Destination)</td>
+                        <td>@Html.DisplayNameFor(model => model.Arrival)</td>
+                        <td>@Html.DisplayNameFor(model => model.Leave)</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@Html.DisplayFor(itemModel => item.Destination)</td>
+                            <td>@Html.DisplayFor(itemModel => item.Arrival)</td>
+                            <td>@Html.DisplayFor(itemModel => item.Leave)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>
