@@ -36,6 +36,8 @@ namespace yourTrip.Models
         {
             return new ApplicationDbContext();
         }
+
+        public System.Data.Entity.DbSet<yourTrip.Models.DestinationModels> DestinationModels { get; set; }
     }
 
 

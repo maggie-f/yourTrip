@@ -26,18 +26,18 @@
                 </div>
             </div>
 
-            @Html.HiddenFor(model => model.PlaceId, htmlAttributes: new { @id = "placeId", @value = "" })
+            @*@Html.HiddenFor(model => model.PlaceId, htmlAttributes: new { @id = "placeId", @value = "" })
             @Html.HiddenFor(model => model.Latitud, htmlAttributes: new { @id = "latitud", @value = "" })
-            @Html.HiddenFor(model => model.Longitud, htmlAttributes: new { @id = "longitud", @value = "" })
+            @Html.HiddenFor(model => model.Longitud, htmlAttributes: new { @id = "longitud", @value = "" })*@
 
-            <div class="form-group">
+            @*<div class="form-group">
                 @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
                 <div class="col-md-10">
                     <div id="locationField">
                         @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control", @type = "text", placeholder = "Witch city are you going?" } })
                     </div>
                 </div>
-            </div>
+            </div>*@
             
             <div class="form-group">
                 <div class="col-md-offset-2 col-md-10">
@@ -50,7 +50,7 @@
             </div>
 
             <div class="alert alert-danger alert-dismissible" role="alert" style="@ViewBag.Error">
-                @Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })
+                @*@Html.ValidationMessageFor(model => model.Destination, "", new { @class = "text-danger" })*@
                 @Html.ValidationMessageFor(model => model.Departure, "", new { @class = "text-danger" })
                 @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger", @value = @ViewBag.InnerException })
             </div>

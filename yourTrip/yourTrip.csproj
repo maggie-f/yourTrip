@@ -231,6 +231,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\DestinationController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\TripController.cs" />
@@ -243,6 +244,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\DestinationModels.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\TripModels.cs" />
@@ -353,6 +355,11 @@
     <Content Include="Views\Trip\Details.cshtml" />
     <Content Include="Views\Trip\_Counter.cshtml" />
     <Content Include="Views\Trip\_PhotosPlace.cshtml" />
+    <Content Include="Views\Destination\Create.cshtml" />
+    <Content Include="Views\Destination\Delete.cshtml" />
+    <Content Include="Views\Destination\Details.cshtml" />
+    <Content Include="Views\Destination\Edit.cshtml" />
+    <Content Include="Views\Destination\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

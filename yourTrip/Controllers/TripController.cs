@@ -18,7 +18,7 @@ namespace yourTrip.Controllers
 {
     public class TripController : Controller
     {
-        static HttpClient client = new HttpClient();
+        static HttpClient client = new HttpClient();        
 
         private TripRepository _repo;
 
@@ -37,7 +37,7 @@ namespace yourTrip.Controllers
                 {
                     IList<TripModels> trips = _repo.Get(GetUserId(), future);
                     TripModels trip = _repo.GetNextTrip(GetUserId());
-                    if(trip != null && trip.Id > 0) 
+                    if (trip != null && trip.Id > 0)
                         ViewBag.Date = trip.Departure.ToString("yyyy/MM/dd");
 
                     return View(trips);
@@ -76,12 +76,16 @@ namespace yourTrip.Controllers
             try
             {
                 //TODO: Chequear porque el model.isValid no funciona y hacer que funcione =)
-                model.UserId = GetUserId();
+                model.UserRefId = GetUserId();
                 //TODO: convertir la fecha a UTCs
-                model.Departure = model.Departure.ToUniversalTime();
+                model.UserRefId = GetUserId();
+                model.Departure = DateTime.UtcNow;
+                model.Return = DateTime.UtcNow;
                 model.Created = DateTime.UtcNow;
+                model.Modified = DateTime.UtcNow;
+
                 _repo.Create(model);
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Destination", model.Id);
             }
             catch(Exception ex)
             {

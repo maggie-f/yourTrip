@@ -18,9 +18,9 @@ namespace yourTrip.Services
                 //            select t;
                 //trips.ToList();
                 if(!future)
-                    return db.Trips.Where(x => x.UserId == userId).Where(x => x.Departure < DateTime.UtcNow).ToList();
+                    return db.Trips.Where(x => x.UserRefId == userId).Where(x => x.Departure < DateTime.UtcNow).ToList();
 
-                return db.Trips.Where(x => x.UserId == userId).Where(x => x.Departure >= DateTime.UtcNow).ToList();
+                return db.Trips.Where(x => x.UserRefId == userId).Where(x => x.Departure >= DateTime.UtcNow).ToList();
             }
         }
 
@@ -64,7 +64,7 @@ namespace yourTrip.Services
         {
             using(var db = new ApplicationDbContext())
             {
-                TripModels trip = db.Trips.Where(x => x.UserId == userId).Where(x => x.Departure >= DateTime.UtcNow).OrderByDescending(x => x.Departure).FirstOrDefault();
+                TripModels trip = db.Trips.Where(x => x.UserRefId == userId).Where(x => x.Departure >= DateTime.UtcNow).OrderByDescending(x => x.Departure).FirstOrDefault();
 
                 return trip;
             }
