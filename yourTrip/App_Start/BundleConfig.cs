@@ -24,8 +24,10 @@ namespace yourTrip
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/bootstrap-grid.min.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-reboot.min.css",
+                      "~/Content/main.css"));
         }
     }
 }

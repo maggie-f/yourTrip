@@ -5,17 +5,36 @@ figure {
   margin: 0; }
 
 a {
-  color: #7F2852; }
+  color: #7e417c; }
   a:hover {
     color: #AE84A0; }
 
-.navbar-trip {
-  background-color: #7F2852;
-  border-color: #e7e7e7; }
-  .navbar-trip a {
+.navbar-purple {
+  background-color: #7F2852; }
+  .navbar-purple .navbar-brand {
     color: #f6e5ee; }
-    .navbar-trip a:hover {
-      color: #808080; }
+    .navbar-purple .navbar-brand:hover, .navbar-purple .navbar-brand:focus {
+      color: #808080;
+      background-color: #EED1E2; }
+  .navbar-purple .navbar-nav .nav-link {
+    color: #f6e5ee; }
+    .navbar-purple .navbar-nav .nav-link:hover, .navbar-purple .navbar-nav .nav-link:focus {
+      color: #808080;
+      background-color: #EED1E2; }
+    .navbar-purple .navbar-nav .nav-link.disabled {
+      color: #B2B3B2; }
+  .navbar-purple .navbar-nav .show > .nav-link,
+  .navbar-purple .navbar-nav .active > .nav-link,
+  .navbar-purple .navbar-nav .nav-link.show,
+  .navbar-purple .navbar-nav .nav-link.active {
+    color: #f6e5ee; }
+  .navbar-purple .navbar-toggler {
+    color: #7F2852;
+    border-color: #e7e7e7; }
+  .navbar-purple .navbar-text {
+    color: #808080; }
+    .navbar-purple .navbar-text a {
+      color: #B2B3B2; }
 
 .title {
   color: #f6e5ee; }

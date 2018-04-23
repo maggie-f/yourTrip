@@ -3,14 +3,25 @@ $secundary-color: #AE84A0;
 $black: #0A0A18;
 $blue-gray: #B2B3B2;
 $third-color: #EED1E2;
-
 $title-color: #f6e5ee;
 $dark-gray: #808080 ;
-
 $white: #ffffff;
 
-body {
+/////
+
+$redColor: #ee4646;
+$fuxColor:#c11072;
+$purpleColor:#7e417c;
+$blueColor:#2191b2;
+$lightBlueColor:#2cbae3;
+
+@mixin hover-focus {
+  &:hover,
+  &:focus {
+    @content;
+  }
 }
+
 * {
     box-sizing: border-box;
 }
@@ -18,22 +29,54 @@ figure {
     margin: 0;
 }
 a{
-    color: $primary-color;
+    color: $purpleColor;
     &:hover{
         color:$secundary-color;
     }
 }
-.navbar-trip {
+
+// Navbar custom themes
+// Styles using as a template the bootstrap light 
+
+.navbar-purple {
     background-color: $primary-color;
-    border-color: #e7e7e7;
-
-    a {
+    .navbar-brand {
         color: $title-color;
-
-        &:hover {
-            color: $dark-gray;
+        @include hover-focus {
+          color: $dark-gray;
+          background-color: $third-color;
         }
     }
+    .navbar-nav {
+        .nav-link {
+            color: $title-color;
+        @include hover-focus {
+          color: $dark-gray;
+          background-color: $third-color;
+        }
+        &.disabled {
+            color: $blue-gray;
+        }
+    }
+    .show > .nav-link,
+    .active > .nav-link,
+    .nav-link.show,
+    .nav-link.active {
+      color: $title-color;
+    }
+  }
+
+  .navbar-toggler {
+    color: $primary-color;
+    border-color: #e7e7e7;
+  }
+
+  .navbar-text {
+    color: $dark-gray;
+    a {
+      color: $blue-gray;
+    }
+  }
 }
 
 .title {
