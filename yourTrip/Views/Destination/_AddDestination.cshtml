@@ -5,7 +5,7 @@
     ViewBag.Latitud = "15";
     ViewBag.Longitud = "0";
     ViewBag.Zoom = "2";
-    //ViewBag.Error = ViewBag.HasErrors ? "display:block;" : "display:none;";
+    ViewBag.Error = ViewBag.HasErrors ? "display:block;" : "display:none;";
 }
 <div class="container body-content">
     <h2>@ViewBag.Title</h2>
@@ -13,7 +13,6 @@
         @using (Html.BeginForm("Create", "Destination", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-
             <div class="col-sm-12">
                 <hr />
                 <div class="form-group">
@@ -29,11 +28,11 @@
                     </div>
                 </div>
 
-                @Html.HiddenFor(model => model.PlaceId, htmlAttributes: new { @id = "placeId", @value = "" })
-                @Html.HiddenFor(model => model.Latitud, htmlAttributes: new { @id = "latitud", @value = "" })
-                @Html.HiddenFor(model => model.Longitud, htmlAttributes: new { @id = "longitud", @value = "" })
-                @Html.HiddenFor(model => model.TripRefId, htmlAttributes: new { @id = "tripRefId", @value = "" })
-                @Html.HiddenFor(model => model.Zoom, htmlAttributes: new { @id = "zoom", @value = "" })
+                @Html.HiddenFor(model => model.PlaceId, htmlAttributes: new { @id = "PlaceId", @value = "" })
+                @Html.HiddenFor(model => model.Latitud, htmlAttributes: new { @id = "Latitud", @value = "" })
+                @Html.HiddenFor(model => model.Longitud, htmlAttributes: new { @id = "Longitud", @value = "" })
+                @Html.HiddenFor(model => model.TripRefId, htmlAttributes: new { @id = "TripRefId", @value = "" })
+                @Html.HiddenFor(model => model.Zoom, htmlAttributes: new { @id = "Zoom", @value = "" })
 
                 <div class="form-group">
                         @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -73,13 +72,13 @@
         @Html.ActionLink("Return", "Index", "Trip")
     </div>
 
-    <!-- Maps Stuff -->
+    <!-- Maps Stuff 
     <div id="listing">
         <table id="resultsTable">
             <tbody id="results"></tbody>
         </table>
     </div>
-
+    -->
     <div style="display: none">
         <div id="info-content">
             <table>
@@ -107,6 +106,7 @@
         </div>
     </div>
 </div>
+@Scripts.Render("~/bundles/jqueryval")
 
 <script type="text/javascript">
     var map, places, infoWindow, place, marker;
@@ -172,19 +172,19 @@
     }
 
     function completeData(place) {
-        var placeId = document.getElementById("placeId");
+        var placeId = document.getElementById("PlaceId");
         placeId.value = place.place_id;
 
-        var latitud = document.getElementById("latitud");
+        var latitud = document.getElementById("Latitud");
         latitud.value = place.geometry.location.lat();
 
-        var longitud = document.getElementById("longitud");
+        var longitud = document.getElementById("Longitud");
         longitud.value = place.geometry.location.lng();
 
-        var trip = document.getElementById("tripRefId");
+        var trip = document.getElementById("TripRefId");
         trip.value = @ViewBag.Trip;
 
-        var zoom = document.getElementById("zoom");
+        var zoom = document.getElementById("Zoom");
         zoom.value = @ViewBag.Zoom;
     }
 
@@ -360,7 +360,3 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

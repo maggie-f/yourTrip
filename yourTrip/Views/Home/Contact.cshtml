@@ -2,22 +2,27 @@
     ViewBag.Title = "Contact";
     ViewBag.Subtitle = "You want to contac us,";
     ViewBag.SubtitleTwo = " here are our vias";
+    Layout = "~/Views/Shared/_Carmela.cshtml";
 }
 
-<div class="container body-content backCover reflector">
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Subtitle</h3>
-    <h3>@ViewBag.SubtitleTwo</h3>
+<main role="main" class="inner cover">
+    <div class="container body-content backCover reflector">
+        <h2>@ViewBag.Title.</h2>
+        <h3>@ViewBag.Subtitle</h3>
+        <h3>@ViewBag.SubtitleTwo</h3>
 
-    <br />
-    <address>
-        Maggie Fortelli<br />
-        <a href="mailto:fortellimaria@gmail.com">Enviar Mail</a>
-        <a href="#">Otro Link?</a>
-    </address>
+        <br />
+        <address>
+            Maggie Fortelli<br />
+            <a href="mailto:fortellimaria@gmail.com">Enviar Mail</a>
+            <a href="#">Otro Link?</a>
+        </address>
 
-    <address>
-        Meli Erizaga<br />
-        <a href="mailto:meli.erizaga@outlook.com">Enviar Mail</a>
-    </address>
-</div>
+        <address>
+            Meli Erizaga<br />
+            <a href="mailto:meli.erizaga@outlook.com">Enviar Mail</a>
+        </address>
+    </div>
+</main>
+
+

@@ -12,6 +12,7 @@
     @RenderSection("scripts", required: false)
 </head>
 <body>
+
     <nav class="navbar navbar-expand-lg navbar-purple">
         @Html.ActionLink("Home", "Index", "Home", null, new { @class = "navbar-brand" })
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,13 +28,10 @@
                 </li>
                 @if (Request.IsAuthenticated)
                 {
-                    <li>@Html.ActionLink("Trip", "Index", "Trip")</li>
+                    <li>@Html.ActionLink("Trip", "Index", "Trip", null, new { @class = "nav-link" })</li>
                 }
-
             </ul>
-            <span class="navbar-text">
-                @Html.Partial("_LoginPartial")
-            </span>
+            @Html.Partial("_LoginPartial")
         </div>
     </nav>
 

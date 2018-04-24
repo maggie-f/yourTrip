@@ -1,9 +1,12 @@
 ﻿@{
     ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Carmela.cshtml";
 }
-<div class="container body-content">
-    <h2>@ViewBag.Title.</h2>
-    <h3>@ViewBag.Message</h3>
 
-    <p>Use this area to provide additional information.</p>
-</div>
+<main role="main" class="inner cover">
+    <h1 class="cover-heading">@ViewBag.Title.</h1>
+    <p class="lead">@ViewBag.Message</p>
+    <p class="lead">
+        Use this area to provide additional information.
+    </p>
+</main>

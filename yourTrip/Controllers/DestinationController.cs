@@ -40,6 +40,7 @@ namespace yourTrip.Controllers
             IList<DestinationModels> destinations = _repo.GetDestinations(Convert.ToInt32(id.ToString()));
             ViewBag.Trip = id;
             ViewBag.HasDestinations = destinations != null && destinations.Count() > 0 ? 1 : 0;
+            ViewBag.HasErrors = false;
             return View(destinations);
         }
 
@@ -80,11 +81,13 @@ namespace yourTrip.Controllers
                 destinationModels.Modified = DateTime.UtcNow;
                 db.DestinationModels.Add(destinationModels);
                 db.SaveChanges();
-                return RedirectToAction("View", new { @id = destinationModels.TripRefId });
+                ViewBag.HasErrors = false;
+                return View();
             }
             catch(Exception ex)
             {
-                return RedirectToAction("Index", "Trip");
+                ViewBag.HasErrors = true;
+                return View();
             }
         }
 

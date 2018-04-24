@@ -72,26 +72,33 @@ namespace yourTrip.Controllers
         [HttpPost]
         public ActionResult Create(TripModels model)
         {
-            ViewBag.HasErrors = false;
+            
             try
             {
-                //TODO: Chequear porque el model.isValid no funciona y hacer que funcione =)
-                model.UserRefId = GetUserId();
-                //TODO: convertir la fecha a UTCs
-                model.Created = DateTime.UtcNow;
-                model.Return = DateTime.UtcNow;
-                model.Modified = DateTime.UtcNow;
+                if (ModelState.IsValid)
+                {
+                    //TODO: Chequear porque el model.isValid no funciona y hacer que funcione =)
+                    model.UserRefId = GetUserId();
+                    //TODO: convertir la fecha a UTCs
+                    model.Created = DateTime.UtcNow;
+                    model.Return = DateTime.UtcNow;
+                    model.Modified = DateTime.UtcNow;
 
-                _repo.Create(model);
-                return RedirectToAction("Index", "Destination", model.Id);
+                    _repo.Create(model);
+                    ViewBag.HasErrors = false;
+                    return RedirectToAction("View", "Destination", routeValues: new { id = model.Id });
+                }
+                ViewBag.InnerException = "Model not valid.";
+                ViewBag.HasErrors = true;
+                return View(model);
             }
             catch(Exception ex)
             {
                 //Log
                 ViewBag.InnerException = ex.Message;
                 ViewBag.HasErrors = true;
+                return View(model);
             }
-            return View(model);
         }
 
         // GET: Trip/Edit/5

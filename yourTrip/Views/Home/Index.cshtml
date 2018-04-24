@@ -1,21 +1,12 @@
 ﻿@{
     ViewBag.Title = "Index";
-    Layout = "~/Views/Shared/_Layout.cshtml";
+    Layout = "~/Views/Shared/_Carmela.cshtml";
 }
 
-
-<div class="container body-content backCover">
-    <div class="page-header">
-        <h1 ><small><span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span></small>Your attention please!</h1>
-    </div>
-
-    <section>
-        <h3>Welcome to My Trips, the place to track, find places of interest and manage your trips!</h3>
-    </section>
-
-
-    <section class="row ">
-        <input type="button" value="Let's go!" class="btn btn-trip btn-lg" onclick="location.href='@Url.Action("Login","Account")'" />
-    </section>
-
-</div>
+<main role="main" class="inner cover">
+    <h1 class="cover-heading">Your attention please!</h1>
+    <p class="lead">Welcome to My Trips, the place to track, find places of interest and manage your trips!</p>
+    <p class="lead">
+        @Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class = "btn btn-lg btn-secondary", @value = "Let's go!" })
+    </p>
+</main>
