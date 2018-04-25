@@ -38,7 +38,10 @@ namespace yourTrip.Controllers
                     IList<TripModels> trips = _repo.Get(GetUserId(), future);
                     TripModels trip = _repo.GetNextTrip(GetUserId());
                     if (trip != null && trip.Id > 0)
+                    {
                         ViewBag.Date = trip.Departure.ToString("yyyy/MM/dd");
+                        ViewBag.TripName = trip.Name;
+                    }
 
                     return View(trips);
                 }

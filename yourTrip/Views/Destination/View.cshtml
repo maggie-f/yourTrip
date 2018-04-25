@@ -5,34 +5,33 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<div class="row">
-    <div class="col-sm-12">
-        @Html.Partial("_AddDestination", new yourTrip.Models.DestinationModels())
+<main class="container">
+    @Html.ActionLink("Return to trip list", "Index", "Trip")
+
+    <div class="row">
+        <div class="col-sm-12">
+            @Html.Partial("_AddDestination", new yourTrip.Models.DestinationModels())
+        </div>
     </div>
-</div>
-<div class="row">
-    <div class="col-sm-12">
-        @if (ViewBag.HasDestinations == 1)
-        {
-            <table>
-                <thead>
-                    <tr>
-                        <td>@Html.DisplayNameFor(model => model.Destination)</td>
-                        <td>@Html.DisplayNameFor(model => model.Arrival)</td>
-                        <td>@Html.DisplayNameFor(model => model.Leave)</td>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card-deck">
+                @if (ViewBag.HasDestinations == 1)
+                {
+                    foreach (var item in Model)
                     {
-                        <tr>
-                            <td>@Html.DisplayFor(itemModel => item.Destination)</td>
-                            <td>@Html.DisplayFor(itemModel => item.Arrival)</td>
-                            <td>@Html.DisplayFor(itemModel => item.Leave)</td>
-                        </tr>
+                        <div class="card">
+                            <div class="card-body">
+                                <p class="card-text">
+                                    @Html.DisplayFor(itemModel => item.Destination) <br />
+                                    @Html.DisplayFor(itemModel => item.Arrival) <br />
+                                    @Html.DisplayFor(itemModel => item.Leave)
+                                </p>
+                            </div>
+                        </div>
                     }
-                </tbody>
-            </table>
-        }
+                }
+            </div>
+        </div>
     </div>
-</div>
+</main>

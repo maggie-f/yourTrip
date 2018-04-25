@@ -1,5 +1,4 @@
 ﻿/* Colors */
-$primary-color: #7F2852;
 $secundary-color: #AE84A0;
 $black: #0A0A18;
 $blue-gray: #B2B3B2;
@@ -49,7 +48,7 @@ a{
 /* Navbar custom themes */
 // Styles using as a template the bootstrap light 
 .navbar-purple {
-    background-color: $primary-color;
+    background-color: $purpleColor;
     .navbar-brand {
         color: $title-color;
         @include hover-focus {
@@ -75,7 +74,7 @@ a{
   }
 
   .navbar-toggler {
-    color: $primary-color;
+    color: $purpleColor;
     border-color: #e7e7e7;
   }
 
@@ -89,6 +88,19 @@ a{
 /* End Navbar custom themes */
 
 
+    
+.card-body{
+    a{
+        color: black;
+        text-decoration: none;
+    }
+}
+.card{
+    &:hover{
+        transition: 1s;
+        background-color: $third-color;
+    }
+}
 
 .title {
     color: $title-color;
@@ -99,8 +111,8 @@ a{
     background-color: $secundary-color;
     border-color: $secundary-color;
     @include hover-focus{
-        background-color: $primary-color;
-        border-color: $primary-color;
+        background-color: $purpleColor;
+        border-color: $purpleColor;
     }
 }
 
@@ -110,26 +122,43 @@ a{
 .btn-trip.active,
 .open .dropdown-toggle.btn-trip {
     color: $white;
-    background-color: $primary-color;
-    border-color: $primary-color;
+    background-color: $purpleColor;
+    border-color: $purpleColor;
 }
 
-.panel-trip {
-    border-color: $secundary-color;
-
-    .panel-heading {
-        color: $primary-color;
-        background-color: $third-color;
-        border-color: $secundary-color;
+.btn-purple{
+    background-color: $secundary-color;
+    color: $white;
+    @include hover-focus{
+        background-color: $purpleColor ;
     }
-
-    .panel-collapse .panel-body {
-        border-top-color: $secundary-color;
+    &:active{
+        background-color: $purpleColor;
     }
+}
 
-    .panel-collapse .panel-body {
-        border-bottom-color: $third-color;
+.btn-blue{
+    background-color: $blueColor;
+    color: $white;
+    @include hover-focus{
+        background-color: $lightBlueColor;
     }
+    &:active{
+        background-color: $lightBlueColor;
+    }
+}
+.btn-light-blue{
+    background-color: $lightBlueColor;
+    color: $white;
+    @include hover-focus{
+        background-color: $blueColor;
+    }
+    &:active{
+        background-color: $blueColor;
+    }
+}
+.form-item{
+    margin-bottom: 0.5em;
 }
 %cover-shared {
     background-repeat: no-repeat;
@@ -229,7 +258,165 @@ table {
 
 // END GOOGLE MAPS
 
-// CLOCK
-#clockdiv {
-    font-family: 'Bungee Hairline', cursive;
+/* Countdown */
+.main-example {
+  margin: 0 auto;
+  width: 100%;
+  .countdown-container {
+    height: 130px;
+  }
+  .time {
+    border-radius: 5px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.5);
+    display: inline-block;
+    text-align: center;
+    position: relative;
+    height: 77px;
+    width: 12%;
+    -webkit-perspective: 479px;
+    -moz-perspective: 479px;
+    -ms-perspective: 479px;
+    -o-perspective: 479px;
+    perspective: 479px;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transform: translate3d(0, 0, 0);
+    -moz-transform: translate3d(0, 0, 0);
+    -ms-transform: translate3d(0, 0, 0);
+    -o-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  .count {
+    background: $secundary-color;
+    color: #f8f8f8;
+    display: block;
+    font-family: 'Oswald', sans-serif;
+    font-size: 2em;
+    line-height: 2.4em;
+    overflow: hidden;
+    position: absolute;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+    top: 0;
+    width: 100%;
+    -webkit-transform: translateZ(0);
+    -moz-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    -o-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-transform-style: flat;
+    -moz-transform-style: flat;
+    -ms-transform-style: flat;
+    -o-transform-style: flat;
+    transform-style: flat;
+    &.top {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 5px 5px 0 0;
+      height: 50%;
+      -webkit-transform-origin: 50% 100%;
+      -moz-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+      -o-transform-origin: 50% 100%;
+      transform-origin: 50% 100%;
+    }
+    &.bottom {
+      background-image: linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+      background-image: -webkit-linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+      background-image: -moz-linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+      background-image: -ms-linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+      background-image: -o-linear-gradient(rgba(255, 255, 255, 0.1), transparent);
+      border-top: 1px solid #000;
+      border-bottom: 1px solid #000;
+      border-radius: 0 0 5px 5px;
+      line-height: 0;
+      height: 50%;
+      top: 50%;
+      -webkit-transform-origin: 50% 0;
+      -moz-transform-origin: 50% 0;
+      -ms-transform-origin: 50% 0;
+      -o-transform-origin: 50% 0;
+      transform-origin: 50% 0;
+    }
+    &.next {}
+  }
+  .label {
+    font-size: normal;
+    margin-top: 5px;
+    display: block;
+    position: absolute;
+    top: 95px;
+    width: 100%;
+  }
+  .count {
+    &.curr.top {
+      -webkit-transform: rotateX(0deg);
+      -moz-transform: rotateX(0deg);
+      -ms-transform: rotateX(0deg);
+      -o-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+      z-index: 3;
+    }
+    &.next.bottom {
+      -webkit-transform: rotateX(90deg);
+      -moz-transform: rotateX(90deg);
+      -ms-transform: rotateX(90deg);
+      -o-transform: rotateX(90deg);
+      transform: rotateX(90deg);
+      z-index: 2;
+    }
+  }
+  .flip .count {
+    &.curr.top {
+      -webkit-transition: all 250ms ease-in-out;
+      -moz-transition: all 250ms ease-in-out;
+      -ms-transition: all 250ms ease-in-out;
+      -o-transition: all 250ms ease-in-out;
+      transition: all 250ms ease-in-out;
+      -webkit-transform: rotateX(-90deg);
+      -moz-transform: rotateX(-90deg);
+      -ms-transform: rotateX(-90deg);
+      -o-transform: rotateX(-90deg);
+      transform: rotateX(-90deg);
+    }
+    &.next.bottom {
+      -webkit-transition: all 250ms ease-in-out 250ms;
+      -moz-transition: all 250ms ease-in-out 250ms;
+      -ms-transition: all 250ms ease-in-out 250ms;
+      -o-transition: all 250ms ease-in-out 250ms;
+      transition: all 250ms ease-in-out 250ms;
+      -webkit-transform: rotateX(0deg);
+      -moz-transform: rotateX(0deg);
+      -ms-transform: rotateX(0deg);
+      -o-transform: rotateX(0deg);
+      transform: rotateX(0deg);
+    }
+  }
+}
+@media screen and (max-width: 48em) {
+  .main-example {
+      .countdown-container {
+        height: 100px;
+      }
+      .time {
+        height: 70px;
+        width: 48px;
+      }
+      .count {
+        font-size: 1.5em;
+        line-height: 70px;
+      }
+      .label {
+        font-size: 0.8em;
+        top: 72px;
+      }
+    }
 }

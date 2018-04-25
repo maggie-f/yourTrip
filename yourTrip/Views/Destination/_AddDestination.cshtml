@@ -7,25 +7,18 @@
     ViewBag.Zoom = "2";
     ViewBag.Error = ViewBag.HasErrors ? "display:block;" : "display:none;";
 }
-<div class="container body-content">
-    <h2>@ViewBag.Title</h2>
-    <div class="row">
+<h2>@ViewBag.Title</h2>
+<div class="row">
+    <div class="col-md-6">
         @using (Html.BeginForm("Create", "Destination", FormMethod.Post))
         {
             @Html.AntiForgeryToken()
-            <div class="col-sm-12">
-                <hr />
+            <div class="alert alert-secondary">
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Arrival, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Arrival, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+                    @Html.EditorFor(model => model.Arrival, new { htmlAttributes = new { @class = "form-control", @placeholder = "Arrival time", @value = "" } })
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Leave, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.Leave, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
+                    @Html.EditorFor(model => model.Leave, new { htmlAttributes = new { @class = "form-control", @placeholder = "Leave time", @value = "" } })
                 </div>
 
                 @Html.HiddenFor(model => model.PlaceId, htmlAttributes: new { @id = "PlaceId", @value = "" })
@@ -35,22 +28,13 @@
                 @Html.HiddenFor(model => model.Zoom, htmlAttributes: new { @id = "Zoom", @value = "" })
 
                 <div class="form-group">
-                        @Html.LabelFor(model => model.Destination, htmlAttributes: new { @class = "control-label col-md-2" })
-                        <div class="col-md-10">
-                            <div id="locationField">
-                                @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control", @type = "text", placeholder = "Witch city are you going?" } })
-                            </div>
-                        </div>
-                    </div>
-
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Create" class="btn btn-default" />
+                    <div id="locationField">
+                        @Html.EditorFor(model => model.Destination, new { htmlAttributes = new { @id = "autocomplete", @class = "form-control", @type = "text", placeholder = "Witch city are you going?" } })
                     </div>
                 </div>
 
                 <div class="form-group">
-                    <div id="map"></div>
+                    <input type="submit" value="Create" class="btn btn-purple btn-block" />
                 </div>
 
                 <div class="alert alert-danger alert-dismissible" role="alert" style="@ViewBag.Error">
@@ -59,51 +43,49 @@
                     @Html.ValidationMessageFor(model => model.Leave, "", new { @class = "text-danger" })
                     @Html.ValidationMessageFor(model => model, "", new { @class = "text-danger", @value = @ViewBag.InnerException })
                 </div>
-
             </div>
         }
-
-        <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
-            <div id="mapsImages"></div>
-        </div>
     </div>
-
-    <div>
-        @Html.ActionLink("Return", "Index", "Trip")
+    <div class="col-md-6">
+        <div id="map"></div>
     </div>
+</div>
 
-    <!-- Maps Stuff 
-    <div id="listing">
-        <table id="resultsTable">
-            <tbody id="results"></tbody>
+<!-- Maps Stuff 
+    <div class="col-lg-5 col-md-5 col-sm-12 col-xs-12">
+        <div id="mapsImages"></div>
+    </div>
+<div id="listing">
+    <table id="resultsTable">
+        <tbody id="results"></tbody>
+    </table>
+</div>
+
+-->
+<div style="display: none">
+    <div id="info-content">
+        <table>
+            <tr id="iw-url-row" class="iw_table_row">
+                <td id="iw-icon" class="iw_table_icon"></td>
+                <td id="iw-url"></td>
+            </tr>
+            <tr id="iw-address-row" class="iw_table_row">
+                <td class="iw_attribute_name">Address:</td>
+                <td id="iw-address"></td>
+            </tr>
+            <tr id="iw-phone-row" class="iw_table_row">
+                <td class="iw_attribute_name">Telephone:</td>
+                <td id="iw-phone"></td>
+            </tr>
+            <tr id="iw-rating-row" class="iw_table_row">
+                <td class="iw_attribute_name">Rating:</td>
+                <td id="iw-rating"></td>
+            </tr>
+            <tr id="iw-website-row" class="iw_table_row">
+                <td class="iw_attribute_name">Website:</td>
+                <td id="iw-website"></td>
+            </tr>
         </table>
-    </div>
-    -->
-    <div style="display: none">
-        <div id="info-content">
-            <table>
-                <tr id="iw-url-row" class="iw_table_row">
-                    <td id="iw-icon" class="iw_table_icon"></td>
-                    <td id="iw-url"></td>
-                </tr>
-                <tr id="iw-address-row" class="iw_table_row">
-                    <td class="iw_attribute_name">Address:</td>
-                    <td id="iw-address"></td>
-                </tr>
-                <tr id="iw-phone-row" class="iw_table_row">
-                    <td class="iw_attribute_name">Telephone:</td>
-                    <td id="iw-phone"></td>
-                </tr>
-                <tr id="iw-rating-row" class="iw_table_row">
-                    <td class="iw_attribute_name">Rating:</td>
-                    <td id="iw-rating"></td>
-                </tr>
-                <tr id="iw-website-row" class="iw_table_row">
-                    <td class="iw_attribute_name">Website:</td>
-                    <td id="iw-website"></td>
-                </tr>
-            </table>
-        </div>
     </div>
 </div>
 @Scripts.Render("~/bundles/jqueryval")
@@ -359,4 +341,4 @@
         }
     }
 </script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
+<script src="htytps://maps.googleapis.com/maps/api/js?key=AIzaSyCFigjZClvz9N8z4KeZpBJyCm1eM_A3-nw&libraries=places&callback=initMap" async defer></script>
